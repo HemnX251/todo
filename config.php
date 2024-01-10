@@ -1,5 +1,26 @@
 <?php
- $db = mysqli_connect('localhost', 'root', '') or
-        die ('Unable to connect. Check your connection parameters.');
-        mysqli_select_db($db, 'project' ) or die(mysqli_error($db));
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "project";
+
+$connection = new mysqli($servername, $username, $password, $database);
+
+if ($connection->connect_error) {
+       die("Something went wrong");
+
+}
+
+
+function getData($connection, $table)
+{
+       $sql = "SELECT * FROM $table";
+       $result = $connection->query($sql);
+
+       if (!$result) {
+              die("Invalid query:" . $connection->error);
+       }
+
+       return $result;
+}
 ?>
