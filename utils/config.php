@@ -23,4 +23,9 @@ function getData($connection, $table)
 
        return $result;
 }
+
+function redirect($path)
+{
+       header("Location: " . $path);
+}
 ?>
