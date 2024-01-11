@@ -1,11 +1,11 @@
 <?php
-require "./config.php";
+include "../utils/config.php";
 include "../utils/header.php";
 ?>
 
 <div class="container my-5">
     <h2>To Do List</h2>
-    <a class="btn btn-primary" href="/todo/create.php" role="button">New Client</a>
+    <a class="btn btn-primary" href="create.php" role="button">New Client</a>
     <br>
 </div>
 
@@ -30,7 +30,7 @@ include "../utils/header.php";
             ?>
             <tr>
                 <td>
-                    <?= $row["people_id"] ?>
+                    <?= $row["id"] ?>
                 </td>
                 <td>
                     <?= $row["name"] ?>
@@ -48,8 +48,8 @@ include "../utils/header.php";
                     <?= $row["created_at"] ?>
                 </td>
                 <td>
-                    <a class='btn btn-primary btn-sm' href='/todo/edit.php?id=<?= $row["id"] ?>'>Edit</a>
-                    <a class=' btn btn-danger btn-sm' href='/todo/delete.php?id=<?= $row["id"] ?>' ]>Delete</a>
+                    <a class='btn btn-primary btn-sm' href='edit.php?id=<?= $row["id"] ?>'>Edit</a>
+                    <a class=' btn btn-danger btn-sm' href='delete.php?id=<?= $row["id"] ?>' ]>Delete</a>
                 </td>
             </tr>
             <?php
@@ -59,5 +59,5 @@ include "../utils/header.php";
 </table>
 
 <?php
-include "../utils/header.php";
+include "../utils/footer.php";
 ?>
