@@ -1,0 +1,13 @@
+This is the database:
+
+Database Name: project
+
+Database code: 
+CREATE TABLE people (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR (100) NOT NULL,
+    email VARCHAR (200) NOT NULL UNIQUE,
+    phone VARCHAR(20) NULL,
+    address VARCHAR(200) NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
