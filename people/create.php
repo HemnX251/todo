@@ -1,5 +1,5 @@
 <?php
-require "./config.php";
+require "../utils/config.php";
 
 $name = "";
 $email = "";
@@ -17,19 +17,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($name) || empty($email) || empty($phone) || empty($address)) {
         $errorMessage = "All the fields are required";
     } else {
-        $sql = "INSERT INTO people (name, email, phone, address)" .
-            "VALUES ('$name', '$email', '$phone', '$address')";
-        $result = $connection->query($sql);
+        $checkEmailQuery = "SELECT * FROM people WHERE email = '$email'";
+        $result = $connection->query($checkEmailQuery);
 
-        if (!$result) {
-            $errorMessage = "Invaled Query: " . $connection->error;
+        if ($result->num_rows > 0) {
+            $errorMessage = "Email already exists. Please choose a different email.";
         } else {
-            redirect("/people/index.php");
+            $sql = "INSERT INTO people (name, email, phone, address) VALUES ('$name', '$email', '$phone', '$address')";
+            $result = $connection->query($sql);
+
+            if (!$result) {
+                $errorMessage = "Invalid Query: " . $connection->error;
+            } else {
+                header("Location: /todo/index.php");
+                exit();
+            }
         }
     }
 }
-
 ?>
+
+
 <?php
 include "../utils/header.php";
 ?>
@@ -95,9 +103,6 @@ include "../utils/header.php";
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
 
-            <div class="col-sm-3d-grid">
-                <a class="btn btn-outline-primary" href="/todo/index.php" role="button">Cancel</a>
-            </div>
         </div>
 
         <?php
